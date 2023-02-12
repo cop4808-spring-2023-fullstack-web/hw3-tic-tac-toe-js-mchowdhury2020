@@ -1,3 +1,5 @@
+
+// Mohammad Chowdhury
 const statusDisplay = document.querySelector('.status');
 
 let gameActive = true;
@@ -19,7 +21,7 @@ statusDisplay.innerHTML = currentPlayerTurn();
 function computerTurn(){
     // This checks if the cell is free once chosen by random if not random again 
     let empty = "NO";
-while(empty == "NO"){
+    while(empty == "NO"){
     clickedCellIndex = Math.floor(Math.random()*9);
     if (gameState[clickedCellIndex] !== "" ){
         empty = "NO";
@@ -27,17 +29,20 @@ while(empty == "NO"){
     else {
         empty = "YES";
     }
-}   
+    }   
 
 
 
-const m = 'div[data-cell-index= "';
-const n = '"] ';
-const CellInput = m + clickedCellIndex + n; // concatanates together 'div[data-cell-index= "randomnumber"]' which selects element by the data index attribute
-alert("It's Player O's Turn");
- let clickedCell = 0;
-document.querySelector(CellInput).innerHTML = "f"; //places f for now for testing 
+    const m = 'div[data-cell-index= "';
+    const n = '"] ';
+    const CellInput = m + clickedCellIndex + n; // concatanates together 'div[data-cell-index= "randomnumber"]' which selects element by the data index attribute
+    alert("It's Player O's Turn");
+    let clickedCell = 0; // arbitary value since computer does not click
+    document.querySelector(CellInput).innerHTML = "f"; //places f for now for testing 
 
+    handleCellPlayed(clickedCell,clickedCellIndex); 
+       
+    handleResultValidation();
 
 }
 
@@ -64,7 +69,7 @@ const winningConditions = [
 
 function handleCellPlayed(clickedCell, clickedCellIndex) {
     gameState[clickedCellIndex] = currentPlayer;
-    
+    // only if player x change inner html since computerTurn takes care of computer move
     if (currentPlayer == "X"){
         clickedCell.innerHTML = currentPlayer;
         } 
@@ -75,6 +80,7 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
 function handlePlayerChange() {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
     statusDisplay.innerHTML = currentPlayerTurn();
+    //calls the computerTurn function
     if (currentPlayer == "O"){
         computerTurn();
         } 
