@@ -67,7 +67,7 @@ function handleResultValidation() {
             roundWon = true;
           
         statusDisplay.innerHTML = winningMessage();
-        const m = 'div[data-cell-index= "';
+        const m = '[data-cell-index= "';
         const n = '"] ';
         const winningCell1 = m + winCondition[0] + n;
         const winningCell2 = m + winCondition[1] + n;
@@ -131,6 +131,7 @@ function handleRestartGame() {
     statusDisplay.style.color = "rgb(65, 65, 65)";
     statusDisplay.innerHTML = currentPlayerTurn();
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+    document.querySelectorAll('.cell').forEach(cell => cell.style.background = "white");
     if (currentPlayer == "O"){ 
         computerTurn();
         }
