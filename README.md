@@ -3,4 +3,4 @@
 Assignment 3 
 Modify Given Tic-Tac-Toe game by adding a computer player, choosing randomly who goes first, keeps track of scores and also highlights the winning cells.
 
-![Tic Tac Toe upgrade](https://github.com/cop4808-spring-2023-fullstack-web/cop4808-git-and-github-fundamentals-mchowdhury2020/blob/main/calculator%20upgrade.gif)
+![Tic Tac Toe upgrade](https://github.com/cop4808-spring-2023-fullstack-web/hw3-tic-tac-toe-js-mchowdhury2020/blob/main/HW3Gif.gif)
