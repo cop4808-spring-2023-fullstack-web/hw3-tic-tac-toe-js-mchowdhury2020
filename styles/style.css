@@ -39,6 +39,19 @@ body {
     cursor: pointer;
     
 }
+.cell:hover {
+    width: 6rem;
+    height: 6rem;
+    border: 6px solid rgb(65, 65, 65);
+    margin: -6px 0 0 -6px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 6rem;
+    font-size: 6rem;
+    cursor: pointer;
+    background-color: blueviolet !important;
+    
+}
 
 a {
     text-decoration: underline;

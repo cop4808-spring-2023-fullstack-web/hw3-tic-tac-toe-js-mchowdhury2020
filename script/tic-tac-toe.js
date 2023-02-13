@@ -1,5 +1,6 @@
 
 // Mohammad Chowdhury
+
 const statusDisplay = document.querySelector('.status');
 
 let gameActive = true;
@@ -24,10 +25,55 @@ const winningConditions = [
     [0, 4, 8],
     [2, 4, 6]
 ];
+function thinking(){
+
+    let clickedCellIndex = 0;
+    let empty = "NO";
+    while(empty == "NO"){
+    clickedCellIndex = Math.floor(Math.random()*9);
+    if (gameState[clickedCellIndex] !== "" ){
+        empty = "NO";
+    }
+    else {
+        empty = "YES";
+    }
+    }   
+     
+    //let colorC = Math.floor(Math.random()*9)
+    const m = 'div[data-cell-index= "';
+    const n = '"] ';
+    const colorCell = m + clickedCellIndex + n; // concatanates together 'div[data-cell-index= "randomnumber"]' which selects element by the data index attribute
+    //alert("It's Player O's Turn");
+    
+
+    document.querySelector(colorCell).style.background = "red"; 
+    setTimeout(clearCell,300);
+   // clearCell();
+
+}
+function clearCell(){
+    document.querySelector('div[data-cell-index= "0"]').style.background = "white"; 
+    document.querySelector('div[data-cell-index= "1"]').style.background = "white"; 
+    document.querySelector('div[data-cell-index= "2"]').style.background = "white"; 
+    document.querySelector('div[data-cell-index= "3"]').style.background = "white"; 
+    document.querySelector('div[data-cell-index= "4"]').style.background = "white"; 
+    document.querySelector('div[data-cell-index= "5"]').style.background = "white"; 
+    document.querySelector('div[data-cell-index= "6"]').style.background = "white"; 
+    document.querySelector('div[data-cell-index= "7"]').style.background = "white"; 
+    document.querySelector('div[data-cell-index= "8"]').style.background = "white"; 
+}
+
+   
+
+   
+
 
 if (currentPlayer == "O"){ // if it is player 0 it will call a funtion called computer turn which will deal with the computer moves
     console.log("Computer goes First ");
-    computerTurn();
+    //computerTurn();
+   
+    var mytime = setInterval(thinking,400);
+    setTimeout(computerTurn, 2000) ;
     }
     else {console.log("Players goes first: Player is X ");}
       
@@ -51,7 +97,9 @@ function handlePlayerChange() {
     console.log("Current player is " + currentPlayer);
     //calls the computerTurn function
     if (currentPlayer == "O"){
-        computerTurn();
+        //computerTurn();
+         mytime = setInterval(thinking,400);
+        setTimeout(computerTurn, 2000) ;
         } 
 }
 
@@ -133,16 +181,21 @@ function handleRestartGame() {
     currentPlayer = player[Math.floor(Math.random()*2)];
     gameState = ["", "", "", "", "", "", "", "", ""];
     statusDisplay.style.color = "rgb(65, 65, 65)";
+    console.log("New Game Has started");
+    console.log("Current player is " + currentPlayer );
     statusDisplay.innerHTML = currentPlayerTurn();
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
     document.querySelectorAll('.cell').forEach(cell => cell.style.background = "white");
+
     if (currentPlayer == "O"){ 
-        computerTurn();
+        mytime = setInterval(thinking,400);
+        setTimeout(computerTurn, 2000) ;
         }
 }
 
 function computerTurn(){
     // This checks if the cell is free once chosen by random if not random again 
+    
    let clickedCellIndex = 0;
     let empty = "NO";
     while(empty == "NO"){
@@ -163,7 +216,11 @@ function computerTurn(){
     //alert("It's Player O's Turn");
     console.log("Computer's Turn ");
     let clickedCell = 0; // arbitary value since computer does not click
-    document.querySelector(CellInput).innerHTML = "O"; // places a O based on random cell choosen
+    document.querySelector(CellInput).innerHTML = "O";
+    document.querySelector(CellInput).style.background = "red"; // places a O based on random cell choosen
+    clearInterval(mytime);
+   
+    
     console.log("Computer has made a move ");
    
     handleCellPlayed(clickedCell,clickedCellIndex);  // puts the mark in the gamestate winning condition array.
@@ -172,6 +229,7 @@ function computerTurn(){
 
    
 }
+
 
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
 document.querySelector('.restart').addEventListener('click', handleRestartGame);
