@@ -47,11 +47,13 @@ function thinking(){
     
 
     document.querySelector(colorCell).style.background = "red"; 
-    setTimeout(clearCell,300);
+  setTimeout(clearCell,300);
    // clearCell();
 
 }
 function clearCell(){
+    
+    if(gameActive){
     document.querySelector('div[data-cell-index= "0"]').style.background = "white"; 
     document.querySelector('div[data-cell-index= "1"]').style.background = "white"; 
     document.querySelector('div[data-cell-index= "2"]').style.background = "white"; 
@@ -61,6 +63,7 @@ function clearCell(){
     document.querySelector('div[data-cell-index= "6"]').style.background = "white"; 
     document.querySelector('div[data-cell-index= "7"]').style.background = "white"; 
     document.querySelector('div[data-cell-index= "8"]').style.background = "white"; 
+}
 }
 
    
@@ -182,7 +185,7 @@ function handleRestartGame() {
     gameState = ["", "", "", "", "", "", "", "", ""];
     statusDisplay.style.color = "rgb(65, 65, 65)";
     console.log("New Game Has started");
-    console.log("Current player is " + currentPlayer );
+    console.log("urrent player is " + currentPlayer );
     statusDisplay.innerHTML = currentPlayerTurn();
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
     document.querySelectorAll('.cell').forEach(cell => cell.style.background = "white");
