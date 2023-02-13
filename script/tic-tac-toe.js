@@ -26,8 +26,10 @@ const winningConditions = [
 ];
 
 if (currentPlayer == "O"){ // if it is player 0 it will call a funtion called computer turn which will deal with the computer moves
+    console.log("Computer goes First ");
     computerTurn();
     }
+    else {console.log("Players goes first: Player is X ");}
       
 statusDisplay.innerHTML = currentPlayerTurn();
 
@@ -46,6 +48,7 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
 function handlePlayerChange() {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
     statusDisplay.innerHTML = currentPlayerTurn();
+    console.log("Current player is " + currentPlayer);
     //calls the computerTurn function
     if (currentPlayer == "O"){
         computerTurn();
@@ -86,11 +89,12 @@ function handleResultValidation() {
         if(currentPlayer == "X"){
             scorePlayer +=1; // increments based on player
             document.getElementById("human").innerHTML = "Human: " + scorePlayer;    //changes the HTML with scores 
+            console.log("Player has Won!");
 
         }else if(currentPlayer == "O"){
             scoreComputer +=1; // increments based on player
-            document.getElementById("comp").innerHTML = "Bot: " + scoreComputer;    
-
+            document.getElementById("comp").innerHTML = "Computer: " + scoreComputer;    
+            console.log("Computer has Won!");
 
         }
 
@@ -112,7 +116,7 @@ function handleResultValidation() {
 }
 
 function handleCellClick(clickedCellEvent) {
-   
+   console.log("Player has made a move.");
     const clickedCell = clickedCellEvent.target;
     const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
 
@@ -150,17 +154,19 @@ function computerTurn(){
         empty = "YES";
     }
     }   
-
+/////end of choosing random number
 
 
     const m = 'div[data-cell-index= "';
     const n = '"] ';
     const CellInput = m + clickedCellIndex + n; // concatanates together 'div[data-cell-index= "randomnumber"]' which selects element by the data index attribute
-    alert("It's Player O's Turn");
+    //alert("It's Player O's Turn");
+    console.log("Computer's Turn ");
     let clickedCell = 0; // arbitary value since computer does not click
-    document.querySelector(CellInput).innerHTML = "O"; 
+    document.querySelector(CellInput).innerHTML = "O"; // places a O based on random cell choosen
+    console.log("Computer has made a move ");
    
-    handleCellPlayed(clickedCell,clickedCellIndex); 
+    handleCellPlayed(clickedCell,clickedCellIndex);  // puts the mark in the gamestate winning condition array.
 
     handleResultValidation(); // checks for winners
 
