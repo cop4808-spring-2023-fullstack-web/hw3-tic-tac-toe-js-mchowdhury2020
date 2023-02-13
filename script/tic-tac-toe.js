@@ -8,8 +8,8 @@ const player =  ["X", "O"];
 
 let currentPlayer = player[Math.floor(Math.random()*2)]; // random Function to see who Goes first
 let gameState = ["", "", "", "", "", "", "", "", ""];
-let scorePlayer = 0;
-let scoreComputer = 0;
+let scorePlayer = 0; // keeps score VAR
+let scoreComputer = 0; // keeps score VAR
 
 const winningMessage = () => `Player ${currentPlayer} has won!`;
 const drawMessage = () => `Game ended in a draw!`;
@@ -30,18 +30,6 @@ if (currentPlayer == "O"){ // if it is player 0 it will call a funtion called co
     }
       
 statusDisplay.innerHTML = currentPlayerTurn();
-
-
-
-
-
-  
-
-
-
-
-
-
 
 
 
@@ -77,13 +65,35 @@ function handleResultValidation() {
         }
         if (a === b && b === c) {
             roundWon = true;
+          
+        statusDisplay.innerHTML = winningMessage();
+        const m = 'div[data-cell-index= "';
+        const n = '"] ';
+        const winningCell1 = m + winCondition[0] + n;
+        const winningCell2 = m + winCondition[1] + n;
+        const winningCell3 = m + winCondition[2] + n;
+        document.querySelector(winningCell1).style.background = 'yellow';
+        document.querySelector(winningCell2).style.background = 'yellow';
+        document.querySelector(winningCell3).style.background = 'yellow';
+            
             break
         }
     }
 
     if (roundWon) {
+       
         statusDisplay.innerHTML = winningMessage();
-        
+        if(currentPlayer == "X"){
+            scorePlayer +=1; // increments based on player
+            document.getElementById("human").innerHTML = "Human: " + scorePlayer;    //changes the HTML with scores 
+
+        }else if(currentPlayer == "O"){
+            scoreComputer +=1; // increments based on player
+            document.getElementById("comp").innerHTML = "Bot: " + scoreComputer;    
+
+
+        }
+
         gameActive = false;
         statusDisplay.style.color = "rgb(251,100,204)";
         return;
@@ -147,7 +157,7 @@ function computerTurn(){
     const CellInput = m + clickedCellIndex + n; // concatanates together 'div[data-cell-index= "randomnumber"]' which selects element by the data index attribute
     alert("It's Player O's Turn");
     let clickedCell = 0; // arbitary value since computer does not click
-    document.querySelector(CellInput).innerHTML = "f"; //places f for now for testing 
+    document.querySelector(CellInput).innerHTML = "O"; 
    
     handleCellPlayed(clickedCell,clickedCellIndex); 
 
